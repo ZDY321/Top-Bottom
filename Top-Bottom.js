@@ -2,7 +2,7 @@
 // @name         滚动到顶部或底部按钮
 // @namespace    http://tampermonkey.net/
 // @version      2.2
-// @description  在网页添加一个“回到顶部”的按钮，可以快速回到页面顶部。
+// @description  在网页添加一个回到顶部或底部的按钮，可以快速回到页面顶部。
 // @author       www.techwb.cn
 // @match        *://*/*
 // @grant        none
@@ -16,7 +16,7 @@
 
     // 创建按钮元素
     var scrollButton = document.createElement('button');
-    scrollButton.textContent = '顶部';
+    scrollButton.textContent = '▲顶部';
     scrollButton.id = 'scroll-top-button';
 
     // 添加按钮样式
@@ -41,7 +41,7 @@
     });
 
     scrollButton.addEventListener('mouseleave', function() {
-        if (scrollButton.textContent === '顶部') {
+        if (scrollButton.textContent === '▲顶部') {
             scrollButton.style.backgroundColor = 'red'; // 鼠标离开时的背景颜色
         } else {
             scrollButton.style.backgroundColor = 'blue'; // 鼠标离开时的背景颜色
@@ -58,10 +58,10 @@
     window.addEventListener('scroll', function() {
         var currentScrollPosition = window.pageYOffset;
         if (currentScrollPosition > lastScrollPosition) { // 向下滚动
-            scrollButton.textContent = '底部';
+            scrollButton.textContent = '▼底部';
             scrollButton.style.background = 'blue';
         } else { // 向上滚动
-            scrollButton.textContent = '顶部';
+            scrollButton.textContent = '▲顶部';
             scrollButton.style.background = 'red';
         }
         lastScrollPosition = currentScrollPosition;
@@ -81,7 +81,7 @@
 
     // 点击按钮时，回到页面顶部或底部
     scrollButton.addEventListener('click', function() {
-        if (scrollButton.textContent === '顶部') {
+        if (scrollButton.textContent === '▲顶部') {
             window.scrollTo(0, 0); // 将页面滚动到顶部
         } else {
             window.scrollTo(0, document.documentElement.scrollHeight - window.innerHeight); // 将页面滚动到底部
